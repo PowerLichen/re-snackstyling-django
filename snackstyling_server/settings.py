@@ -25,8 +25,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'model.clothing',
+    
     'rest_framework',
     'drf_spectacular',
+    'django_extensions',
     
     'django.contrib.admin',
     'django.contrib.auth',
