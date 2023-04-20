@@ -14,3 +14,10 @@ class ClothingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clothing
         fields = ["id", "user", "image", "created"]
+
+class ClothingCreateSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    
+    class Meta:
+        model = Clothing
+        fields = ["id", "user", "image"]
