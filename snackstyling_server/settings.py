@@ -26,6 +26,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'model.clothing',
+    'model.clothing_tag',
     
     'rest_framework',
     'drf_spectacular',
