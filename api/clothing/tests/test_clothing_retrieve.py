@@ -1,3 +1,10 @@
+"""
+Test clothing retrieve
+clothing retrieve 기능 테스트 코드
+
+@author 최민수
+@create 2023-04-24
+"""
 import shutil
 
 from django.test import override_settings
