@@ -6,6 +6,7 @@ from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
 from lib.factory.factory_clothing import ClothingFactory
+from lib.factory.factory_clothing_tag import ClothingTagFactory
 from lib.factory.factory_user import UserFactory
 
 TEST_DIR = "test_src/clothing/retrieve"
@@ -16,9 +17,12 @@ class ClothingRetrieveTestCase(APITestCase):
     @classmethod
     def setUpTestData(cls):
         cls.current_user = UserFactory()
+        test_tags = ClothingTagFactory.create_batch(3)
         cls.clothing = ClothingFactory(
-            user=cls.current_user
+            user=cls.current_user,
+            tags=test_tags
         )
+        
         cls.url = reverse(
             "clothing-detail",
             kwargs={"pk": cls.clothing.id}
@@ -51,8 +55,11 @@ class ClothingRetrieveTestCase(APITestCase):
         self.assertEqual(res.data["id"], self.clothing.id)
         self.assertEqual(res.data["user"], self.current_user.id)
         self.assertTrue(res.data["image"].endswith(self.clothing.image.name))
-        self.assertEqual(res.data["category"], "없음")
-        self.assertEqual(len(res.data["tags"]), 0)
+        self.assertEqual(len(res.data["category"]), 0)
+        self.assertEqual(len(res.data["tags"]), len(self.clothing.tags.all()))
+        for clothing_tag in self.clothing.tags.all():
+            self.assertIn(clothing_tag.name, res.data["tags"])
+            
         
     def test_clothing_retrieve_with_invalid_pk(self):
         """옷 단일 조회 테스트(유효하지 않은 pk)"""
