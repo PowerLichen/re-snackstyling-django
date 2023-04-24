@@ -1,3 +1,10 @@
+"""
+Test clothing create
+clothing create 기능 테스트 코드
+
+@author 최민수
+@create 2023-04-24
+"""
 import shutil
 
 from django.core.files.uploadedfile import SimpleUploadedFile
