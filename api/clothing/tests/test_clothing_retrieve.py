@@ -40,8 +40,19 @@ class ClothingRetrieveTestCase(APITestCase):
             self.url
         )
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+        
+        self.assertIn("id", res.data)
+        self.assertIn("user", res.data)
+        self.assertIn("image", res.data)
+        self.assertIn("created", res.data)
+        self.assertIn("category", res.data)
+        self.assertIn("tags", res.data)
+        
+        self.assertEqual(res.data["id"], self.clothing.id)
         self.assertEqual(res.data["user"], self.current_user.id)
         self.assertTrue(res.data["image"].endswith(self.clothing.image.name))
+        self.assertEqual(res.data["category"], "없음")
+        self.assertEqual(len(res.data["tags"]), 0)
         
     def test_clothing_retrieve_with_invalid_pk(self):
         """옷 단일 조회 테스트(유효하지 않은 pk)"""
