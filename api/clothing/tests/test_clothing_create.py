@@ -10,10 +10,10 @@ from lib.factory.factory_user import UserFactory
 from lib.factory.file_mock import file_image
 from model.clothing.models import Clothing
 
-TEST_DIR = "test_data"
+TEST_DIR = "test_src/clothing/create"
 
 
-@override_settings(MEDIA_ROOT=(TEST_DIR + '/media'))
+@override_settings(MEDIA_ROOT=TEST_DIR)
 class ClothingCreateTestCase(APITestCase):
     @classmethod
     def setUpTestData(cls):
