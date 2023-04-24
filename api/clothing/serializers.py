@@ -21,3 +21,14 @@ class ClothingCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clothing
         fields = ["id", "user", "image"]
+        
+class ClothingRetrieveSerializer(serializers.ModelSerializer):
+    category = serializers.SerializerMethodField()
+    tags = serializers.StringRelatedField(many=True)
+    
+    class Meta:
+        model = Clothing
+        fields = ["id", "user", "image", "category", "tags", "created"]
+        
+    def get_category(self, obj):
+        return obj.tags.filter(type="CTG")

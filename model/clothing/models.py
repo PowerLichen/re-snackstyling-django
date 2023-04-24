@@ -22,6 +22,7 @@ class Clothing(TimeStampedModel):
         "clothing image",
         upload_to="clothing/%Y/%m/%d/"
     )
+    tags = models.ManyToManyField("clothing_tag.ClothingTag")
     is_active = models.BooleanField(default=True)
     
     objects = models.Manager()

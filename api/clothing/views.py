@@ -9,6 +9,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from api.clothing.serializers import ClothingSerializer
 from api.clothing.serializers import ClothingCreateSerializer
+from api.clothing.serializers import ClothingRetrieveSerializer
 from model.clothing.models import Clothing
 
 
@@ -19,4 +20,6 @@ class ClothingViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.action == "create":
             return ClothingCreateSerializer
+        if self.action == "retrieve":
+            return ClothingRetrieveSerializer
         return super().get_serializer_class()
