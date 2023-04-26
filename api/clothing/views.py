@@ -29,3 +29,7 @@ class ClothingViewSet(ModelViewSet):
             return ClothingUpdateSerializer
         
         return super().get_serializer_class()
+    
+    def perform_destroy(self, instance):
+        instance.is_active = False
+        instance.save()
