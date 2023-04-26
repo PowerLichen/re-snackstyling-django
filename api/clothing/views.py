@@ -10,6 +10,7 @@ from rest_framework.viewsets import ModelViewSet
 from api.clothing.serializers import ClothingSerializer
 from api.clothing.serializers import ClothingCreateSerializer
 from api.clothing.serializers import ClothingRetrieveSerializer
+from api.clothing.serializers import ClothingUpdateSerializer
 from model.clothing.models import Clothing
 
 
@@ -24,5 +25,7 @@ class ClothingViewSet(ModelViewSet):
             return ClothingRetrieveSerializer
         if self.action == "list":
             return ClothingRetrieveSerializer
+        if self.action in ["update", "partial_update"]:
+            return ClothingUpdateSerializer
         
         return super().get_serializer_class()
