@@ -22,4 +22,7 @@ class ClothingViewSet(ModelViewSet):
             return ClothingCreateSerializer
         if self.action == "retrieve":
             return ClothingRetrieveSerializer
+        if self.action == "list":
+            return ClothingRetrieveSerializer
+        
         return super().get_serializer_class()
