@@ -32,3 +32,9 @@ class ClothingRetrieveSerializer(serializers.ModelSerializer):
         
     def get_category(self, obj):
         return obj.tags.filter(type="CTG").values_list("name", flat=True)
+    
+class ClothingUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Clothing
+        fields = ["image", "tags"]
+    
